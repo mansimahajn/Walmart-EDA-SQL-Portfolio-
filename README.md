@@ -1,5 +1,5 @@
 # Walmart Sales Data Analysis
-![polotno (8)](https://github.com/iguptashubham/walmart-eda/assets/140319219/da1fa33a-364f-4cd7-a0bf-55912ab6e338)
+
 
 ## About
 

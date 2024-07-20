@@ -149,16 +149,15 @@ limit 1;
 -- >> Fetch each product line and add a column to those product line
 -- showing "Good", "Bad". Good if its greater than average sales
 
-SELECT product_line, performance
-FROM
-(SELECT product_line, ROUND(AVG(total),2) as avg_sale,
-(SELECT ROUND(AVG(total),2)) as sales_avg,
-CASE
-	WHEN (SELECT ROUND(AVG(total),4)) <= (ROUND(AVG(total),4)) THEN 'Good'
-	ELSE 'Bad'
-	END as performance
-FROM sales
-GROUP BY product_line) as ratdf;
+select product_line,case 
+when avg_sale >= (select ROUND(AVG(total), 2) from sales) then 'Good'
+else 'Bad'
+end as performance
+from (select product_line,round(avg(total), 2) as avg_sale
+from sales
+group by product_line
+) as subquery;
+
 
 -- >> Which branch sold more products than average product sold?
 

@@ -304,6 +304,7 @@ FROM sales
 GROUP BY day_name
 ORDER BY  avg_rat DESC;
 
+
 -- >> Which day of the week has the best average ratings per branch?
 
 WITH avgdf as 

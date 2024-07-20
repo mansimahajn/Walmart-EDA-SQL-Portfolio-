@@ -5,8 +5,6 @@
 
 This project delves into Walmart's sales data to pinpoint high-performing stores and products. By analyzing sales trends and customer behavior, the goal is to optimize sales strategies. This will involve identifying top-selling items, understanding how different products perform over time, and uncovering customer buying patterns. Ultimately, these insights will be used to refine sales strategies and maximize profitability.
 
-"In this recruiting competition, job-seekers are provided with historical sales data for 45 Walmart stores located in different regions. Each store contains many departments, and participants must project the sales for each department in each store. To add to the challenge, selected holiday markdown events are included in the dataset. These markdowns are known to affect sales, but it is challenging to predict which departments are affected and the extent of the impact." [source](https://www.kaggle.com/c/walmart-recruiting-store-sales-forecasting)
-
 ## Purposes Of The Project
 
 The major aim of thie project is to gain insight into the sales data of Walmart to understand the different factors that affect sales of the different branches.

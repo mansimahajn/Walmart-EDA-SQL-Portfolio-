@@ -102,12 +102,6 @@ group by city;
 
 select count(distinct(product_line)) as unique_product from sales;
 
--- >> What is the most common payment method ?
-
-select payment, count(payment) as count from sales
-group by payment
-order by count desc
-limit 1;
 
 -- >> What is the most selling product line ?
 
@@ -115,15 +109,6 @@ select product_line, count(product_line) as count from sales
 group by product_line
 order by count desc;
 
--- >> What is the total revenue by month ?
-
-select month_name, sum(total) as sales from sales
-group by month_name;
-
--- >> What month had the largest COGS?
-
-select month_name, sum(cogs) as total_cogs from sales
-group by month_name;
 
 -- >> What product line had the largest revenue?
 
@@ -132,12 +117,6 @@ group by product_line
 order by sales desc
 limit 1;
 
--- >> What is the city with the largest revenue?
-
-select city, sum(total) as sale from sales
-group by city
-order by sale desc
-limit 1;
 
 -- >> What product line had the largest VAT?
 
@@ -145,6 +124,7 @@ select product_line, max(tax_pct) as vat from sales
 group by product_line
 order by vat desc
 limit 1;
+
 
 -- >> Fetch each product line and add a column to those product line
 -- showing "Good", "Bad". Good if its greater than average sales
@@ -177,6 +157,7 @@ SELECT gender, product_line, count(gender) as count from sales
 group by gender, product_line
 order by gender desc;
 
+
 -- >> What is the average rating of each product line?
 
 SELECT product_line, ROUND(AVG(rating),2) AS avg_rating FROM sales
@@ -186,35 +167,44 @@ GROUP BY product_line;
 ------------- Sales -----------------------
 -------------------------------------------
 
+-- >> What is the most common payment method ?
+
+select payment, count(payment) as count from sales
+group by payment
+order by count desc
+limit 1;
+
+
+-- >> What is the total revenue by month ?
+
+select month_name, sum(total) as sales from sales
+group by month_name;
+
+
+-- >> What month had the largest COGS?
+
+select month_name, sum(cogs) as total_cogs from sales
+group by month_name;
+
+
 -- >> Number of sales made in each time of the day per weekday ?
 
 SELECT day_name, COUNT(invoice_id) as total_invoice, SUM(total) as sale FROM sales
 GROUP BY day_name;
 
--- >> Which of the customer types brings the most revenue?
 
-SELECT customer_type, SUM(total) as total FROM sales
-group by customer_type
-order by total desc
-LIMIT 1;
+-- >> What is the city with the largest revenue?
+
+select city, sum(total) as sale from sales
+group by city
+order by sale desc
+limit 1;
+
 
 -- >> Which city has the largest tax percent/ VAT (Value Added Tax)?
 
-SELECT
-	city, Max(tax_pct) as vat
-FROM
-	sales
+SELECT city, Max(tax_pct) as vat FROM sales
 GROUP BY city
-ORDER BY vat desc;
-
-
--- >> Which customer type pays the most in VAT?
-
-SELECT
-	customer_type, Max(tax_pct) as vat
-FROM
-	sales
-GROUP BY customer_type
 ORDER BY vat desc;
 
 
@@ -226,21 +216,19 @@ ORDER BY vat desc;
 SELECT distinct(customer_type) from sales;
 
 
--- >> How many unique payment methods does the data have?
-
-SELECT distinct(payment) from sales;
-
-
 -- >> What is the most common customer type?
 
-SELECT customer_type, count(customer_type) as count
+SELECT 
+	customer_type, count(customer_type) as count
 from sales
 group by customer_type
 order by count desc;
 
+
 -- >> Which customer type buys the most?
 
-SELECT customer_type, count(invoice_id) as count
+SELECT
+	customer_type, count(invoice_id) as count
 from sales
 group by customer_type
 order by count desc;
@@ -248,7 +236,7 @@ order by count desc;
 
 -- >> What is the gender of most of the customers?
 
-SELECT
+SELECT 
 	gender, COUNT(gender) as count
 FROM
 	sales
@@ -263,6 +251,27 @@ SELECT branch,
        SUM(CASE WHEN gender = 'Female' THEN 1 ELSE 0 END) as female_count
 FROM sales
 GROUP BY branch;
+
+
+-- >> Which of the customer types brings the most revenue?
+
+SELECT
+	customer_type, SUM(total) as total 
+FROM 
+	sales
+group by customer_type
+order by total desc
+LIMIT 1;
+
+
+-- >> Which customer type pays the most in VAT?
+
+SELECT
+	customer_type, Max(tax_pct) as vat
+FROM
+	sales
+GROUP BY customer_type
+ORDER BY vat desc;
 
 
 -- >> Which time of the day do customers give most ratings?
@@ -288,7 +297,7 @@ select branch, time_of_day from rating_counts
 where ranking = 1;
 
 
--- >> Which day fo the week has the best avg ratings?
+-- >> Which day of the week has the best avg ratings?
 
 SELECT day_name, ROUND(AVG(rating),2) as avg_rat
 FROM sales

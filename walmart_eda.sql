@@ -58,7 +58,7 @@ set time_of_day = (case
     else 'Evening'
     end);
     
--- Add column 'day_namw' --------------
+-- Add column 'day_name' --------------
 ---------------------------------------
 
 alter table sales

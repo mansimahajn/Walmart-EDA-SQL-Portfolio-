@@ -316,4 +316,3 @@ GROUP BY branch, day_name)
 SELECT branch, day_name, avg_rat from avgdf
 WHERE avg_rank = 1;
 
-SELECT * FROM sales;
